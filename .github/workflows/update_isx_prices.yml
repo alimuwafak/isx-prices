@@ -29,7 +29,15 @@ jobs:
           playwright install --with-deps chromium
 
       - name: Run scraper
-        run: python fetch_isx_prices.py
+        run: python fetch_isx_prices.py --debug
+
+      - name: Upload debug artifacts (for diagnosis)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-files
+          path: debug/
+          retention-days: 3
 
       - name: Commit updated prices.json
         run: |
