@@ -29,12 +29,12 @@ jobs:
           playwright install --with-deps chromium
 
       - name: Run scraper
-        run: python scraper/fetch_isx_prices.py
+        run: python fetch_isx_prices.py
 
       - name: Commit updated prices.json
         run: |
           git config user.name "isx-price-bot"
           git config user.email "actions@github.com"
-          git add scraper/prices.json
+          git add prices.json
           git diff --quiet --cached || git commit -m "Update ISX prices [automated]"
           git push
